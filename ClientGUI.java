@@ -51,8 +51,19 @@ public class ClientGUI extends Client {
                     DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
                     clientSocket.receive(receivePacket);
                     bid = ByteBuffer.wrap(receiveData).getDouble();
-                    System.out.println("bid: " + bid);
-                    //ClientGUI.maxBid.setText("Current max Bid: " + Client.bid);
+
+                    //Uncomment this to add receiving of buyer address and time left in auction
+                    //CLIENT TEXT SHOULDN'T DO ANYTHING WITH TIME OTHER THAN RECEIVE TO CLEAR THE PACKET
+                    /*
+                    receivePacket = new DatagramPacket(addressPacket, addressPacket.length);
+                    clientSocket.receive(receivePacket);
+                    buyerAddress = new String(addressPacket);
+                    buyerAddress = buyerAddress.trim();
+                    receivePacket = new DatagramPacket(timePacket, timePacket.length);
+                    socket.receive(receivePacket);
+                    */
+                    System.out.println("Max bid: " + bid);
+                    maxBid.setText("$" + bid);
                     clientSocket.close();
                 } catch (IOException e) {}
             }
